@@ -1,6 +1,6 @@
 package domain
 
 type Message struct {
-	Username    string `json:"user"`
-	Message string `json:"message"`
+	Username string `json:"name"`
+	Message  string `json:"message"`
 }

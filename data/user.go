@@ -1,6 +1,8 @@
 package data
 
-import "github.com/MikelSot/melody-backend/domain"
+import (
+	"github.com/MikelSot/melody-backend/domain"
+)
 
 type User struct {
 	user       *domain.User

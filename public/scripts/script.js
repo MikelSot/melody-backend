@@ -31,7 +31,7 @@ window.addEventListener('load', event => {
 
   conn.onmessage = function (event) {
     const message = JSON.parse(event.data)
-    appendMessage(message.nickname, 'outgoing', message.content)
+    appendMessage(message.name, 'outgoing', message.message)
   }
 })
 
@@ -44,14 +44,14 @@ chatForm.addEventListener('submit', event => {
   appendMessage(NAME, 'incoming', message)
   chatInput.value = ''
 
-  conn.send(JSON.stringify({ nickname: NAME, content: message }))
+  conn.send(JSON.stringify({ name: NAME, message: message }))
 })
 
-function appendMessage(nickname, type, message) {
+function appendMessage(name, type, message) {
   const msgBubble = `
     <div class="msg-bubble msg-${type}">
         <div class="msg-info">
-            <span class="msg-name">${nickname}</span>
+            <span class="msg-name">${name}</span>
             <span class="msg-time">${formatDate(new Date())}</span>
         </div>
     
