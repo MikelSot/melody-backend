@@ -13,6 +13,6 @@ type UniqueName interface {
 }
 
 type ReadAndWriteWS interface {
-	Read()
-	Write()
+	Read(user *domain.User)
+	Write(user *domain.User)
 }

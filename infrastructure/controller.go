@@ -3,7 +3,6 @@ package infrastructure
 import (
 	"github.com/MikelSot/melody-backend/domain"
 	"github.com/MikelSot/melody-backend/interfaces"
-	"log"
 )
 
 type controller struct {
@@ -11,13 +10,13 @@ type controller struct {
 	controller *domain.Controller
 }
 
-func newController(
+func NewController(
 	data interfaces.DataPersistence,
 	c *domain.Controller ) *controller {
 	return &controller{data, c}
 }
 
-func (c controller) run() {
+func (c controller) Run() {
 	for {
 		select {
 		case user := <- c.controller.Login:
@@ -26,8 +25,6 @@ func (c controller) run() {
 			c.data.DeleteUser(user)
 		case message := <- c.controller.Broadcast:
 			c.data.AddMessageQueue(message)
-		default:
-			log.Println("F")
 		}
 	}
 }

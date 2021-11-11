@@ -7,26 +7,24 @@ import (
 	"time"
 )
 
-type user struct {
-	user *domain.User
-}
+type user struct {}
 
-func newUser(u *domain.User) *user{
-	return &user{u}
+func NewUser() *user{
+	return &user{}
 }
 
 // leemos el mensaje del frontend
-func (u user) Read() {
+func (u user) Read(user *domain.User) {
 	defer func() {
-		u.user.Controller.Logout <- u.user
-		u.user.Conn.Close()
+		user.Controller.Logout <- user
+		user.Conn.Close()
 	}()
 
-	u.user.Conn.SetReadLimit(maxMessageSize)
+	user.Conn.SetReadLimit(maxMessageSize)
 
 	for {
 		message := domain.Message{}
-		err := u.user.Conn.ReadJSON(&message)
+		err := user.Conn.ReadJSON(&message)
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(
 				err,
@@ -38,24 +36,24 @@ func (u user) Read() {
 			return
 		}
 
-		u.user.Controller.Broadcast <- message
+		user.Controller.Broadcast <- message
 	}
 }
 
 // leemos el mensaje y lo enviamos a frontend
-func (u user) Write() {
+func (u user) Write(user *domain.User) {
 	defer func() {
-		u.user.Conn.Close()
+		user.Conn.Close()
 	}()
 
 	for {
 		select {
-		case message, status := <-u.user.Message:
+		case message, status := <-user.Message:
 			if !status {
 				return
 			}
-			u.user.Conn.SetWriteDeadline(time.Now().Add(writeWait))
-			err := u.user.Conn.WriteJSON(message)
+			user.Conn.SetWriteDeadline(time.Now().Add(writeWait))
+			err := user.Conn.WriteJSON(message)
 			if err != nil {
 				log.Println("no se puedo escribir el mensaje en el ws")
 				return

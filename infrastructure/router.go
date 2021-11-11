@@ -2,12 +2,13 @@ package infrastructure
 
 import (
 	"github.com/MikelSot/melody-backend/domain"
+	"github.com/MikelSot/melody-backend/middleware"
 	"net/http"
 )
 
 type router struct {
 	serveMux   *http.ServeMux
-	hanbler    *handler
+	handler    *handler
 	controller *domain.Controller
 }
 
@@ -19,9 +20,9 @@ func NewRouter(
 }
 
 func (ro router) Router() {
-	ro.serveMux.HandleFunc("/ws", ro.Request)
+	ro.serveMux.HandleFunc("/ws", middleware.Log(ro.Request))
 }
 
 func (ro router) Request(w http.ResponseWriter, r *http.Request) {
-	ro.hanbler.handler(ro.controller, w, r)
+	ro.handler.handler(ro.controller, w, r)
 }

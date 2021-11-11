@@ -9,15 +9,13 @@ import (
 
 type handler struct {
 	exists interfaces.UniqueName
-	user   *domain.User
 	rw     interfaces.ReadAndWriteWS
 }
 
-func newHandler(
+func NewHandler(
 	e interfaces.UniqueName,
-	u *domain.User,
 	rw interfaces.ReadAndWriteWS ) *handler {
-	return &handler{e, u, rw}
+	return &handler{e,  rw}
 }
 
 func (h *handler) handler(controller *domain.Controller, w http.ResponseWriter, r *http.Request) {
@@ -47,7 +45,8 @@ func (h *handler) handler(controller *domain.Controller, w http.ResponseWriter, 
 		Message:    make(chan domain.Message, 10),
 	}
 
-	h.user.Controller.Login <- user
-	go h.rw.Read()
-	go h.rw.Write()
+	user.Controller.Login <- user
+
+	go h.rw.Read(user)
+	go h.rw.Write(user)
 }
