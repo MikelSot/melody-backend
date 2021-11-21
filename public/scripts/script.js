@@ -7,7 +7,6 @@ new lc_emoji_picker('input', {
   },
 })
 
-// conn variable for the websocket connection
 let conn
 
 // chat elements
@@ -19,21 +18,22 @@ const NAME = GetRandomName()
 
 window.addEventListener('load', event => {
   if (!window['WebSocket']) {
-    chatTalk.insertAdjacentHTML('beforeend', `<b>Your browser does not support WebSockets.</b>`)
+    chatTalk.insertAdjacentHTML('beforeend', `<b>Error el navegador no soporta websocket</b>`)
     return
   }
 
   conn = new WebSocket('ws://' + document.location.host + `/ws?name=${NAME}`)
 
   conn.onclose = function (event) {
-    chatTalk.insertAdjacentHTML('beforeend', `<b>Connection closed.</b>`)
+    chatTalk.insertAdjacentHTML('beforeend', `<b>Conexión Cerrada</b>`)
   }
 
   conn.onmessage = function (event) {
     const message = JSON.parse(event.data)
-    appendMessage(message.name, 'outgoing', message.message)
+    appendMessage(message.name, 'received', message.message)
   }
 })
+
 
 chatForm.addEventListener('submit', event => {
   event.preventDefault()
@@ -41,15 +41,15 @@ chatForm.addEventListener('submit', event => {
   const message = chatInput.value
   if (!message) return
 
-  appendMessage(NAME, 'incoming', message)
+  appendMessage(NAME, 'send', message)
   chatInput.value = ''
 
   conn.send(JSON.stringify({ name: NAME, message: message }))
 })
 
-function appendMessage(name, type, message) {
-  const msgBubble = `
-    <div class="msg-bubble msg-${type}">
+const appendMessage =(name, type, message) => {
+  const msg = `
+    <div class="msg msg-${type}">
         <div class="msg-info">
             <span class="msg-name">${name}</span>
             <span class="msg-time">${formatDate(new Date())}</span>
@@ -62,7 +62,7 @@ function appendMessage(name, type, message) {
   `
 
   const doScroll = chatTalk.scrollTop > chatTalk.scrollHeight - chatTalk.clientHeight - 1
-  chatTalk.insertAdjacentHTML('beforeend', msgBubble)
+  chatTalk.insertAdjacentHTML('beforeend', msg)
 
   if (doScroll) {
     chatTalk.scrollTop = chatTalk.scrollHeight - chatTalk.clientHeight
@@ -70,10 +70,10 @@ function appendMessage(name, type, message) {
 }
 
 // ---------------------------------------------------------
-// helpers
+// hora
 // ---------------------------------------------------------
 
-function formatDate(date) {
+const formatDate =(date) => {
   const hours = '0' + date.getHours()
   const minutes = '0' + date.getMinutes()
 
