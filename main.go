@@ -29,6 +29,6 @@ func main() {
 		AllowCredentials: true,
 	}).Handler(serveMux)
 
-	log.Println("Servidor iniciado en el puerto :8080")
-	log.Println(http.ListenAndServe(":8080", cors))
+	log.Println("Servidor iniciado en el puerto :8000")
+	log.Println(http.ListenAndServe(":8000", cors))
 }

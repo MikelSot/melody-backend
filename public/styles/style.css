@@ -7,19 +7,22 @@
 }
 
 :root {
-    --body-background: #f8f9fa;
+    --body-background: #ecf0f0;
     --chat-background: #e5ddd5;
-    --incoming-background: #ececec;
-    --outgoing-background: #dcf8c6;
-    --primary-color: #f0f0f0;
-    --accent-color: #07bc4c;
+    --send-background:  #b7c1c0;
+    --received-background: #ecf0f3;
+    --primary-color: #273b49;
+    --accent-color: #192229;
     --font-color: #4a4a4a;
+    --color-name:#1a1a1a;
+    --color-txt:#192229;
     --border: 1px solid #ddd;
     --shadow-rgb: 0, 0, 0;
     --chat-gap: 10px;
     --gap: 15px;
-    --small-radius: 5px;
+    --small-radius: 8px;
     --medium-radius: 10px;
+    --hover-background:#687782;
 }
 
 html {
@@ -41,26 +44,21 @@ body {
     flex-flow: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     height: calc(100% - 50px);
     border: var(--border);
     border-radius: var(--small-radius);
-    box-shadow: 0 1px 1px 0 rgba(var(--shadow-rgb), .06), 0 2px 5px 0 rgba(var(--shadow-rgb), .2);
+    box-shadow: 0 1px 1px 0 rgba(var(--shadow-rgb), .06), 0 2px 2px 0 rgba(var(--shadow-rgb), .2);
 }
 
 .chat-header {
     display: flex;
     padding: var(--gap);
-    border-bottom: var(--border);
+    border-top-right-radius: var(--small-radius);
+    border-top-left-radius: var(--small-radius);
     background-color: var(--primary-color);
     color: #000;
     font-weight: bold;
-}
-
-.logo {
-    width: 16px;
-    height: 16px;
-    margin-right: var(--chat-gap);
 }
 
 .chat-talk {
@@ -95,13 +93,13 @@ body {
 
 .msg-received {
     align-self: flex-start;
-    background-color: var(--incoming-background);
+    background-color: var(--received-background);
     border-radius: var(--medium-radius) var(--medium-radius) var(--medium-radius) 0;
 }
 
 .msg-send {
     align-self: flex-end;
-    background-color: var(--outgoing-background);
+    background-color: var(--send-background);
     border-radius: var(--medium-radius) var(--medium-radius) 0 var(--medium-radius);
 }
 
@@ -112,21 +110,27 @@ body {
     user-select: none;
 }
 
+.msg-text{
+    color: var(--color-txt);
+}
+
 .msg-name {
     font-weight: bold;
+    color:var(--color-name);
     margin-right: var(--chat-gap);
 }
 
 .msg-time {
     font-size: 11px;
-    color: rgba(0, 0, 0, .45);
+    color: var(--color-name);
 }
 
 .chat-form {
     display: flex;
     padding: var(--gap);
-    border-top: var(--border);
     background-color: var(--primary-color);
+    border-bottom-right-radius: var(--small-radius);
+    border-bottom-left-radius: var(--small-radius);
 }
 
 /* class of lc_emoji_picker dependency */
@@ -157,4 +161,39 @@ body {
     font-weight: bold;
     color: #fff;
     cursor: pointer;
+
+}
+.chat-send-button:hover{
+   background: var(--hover-background)
+}
+
+
+.icon-dragon{
+    /*border: 1px solid black;*/
+    margin-right: .5em;
+    font-size: 1.3rem;
+    color:#ecf0f3;
+}
+
+.chat-header h1{
+    font-size:1.3rem;
+    color: #ecf0f3;
+}
+
+.gopher{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 5%;
+    height: 8%;
+    border-radius:5px;
+    background-image: url(../static/images/sleep-gopher.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+@media screen and (max-width: 480px){
+    .gopher{
+        display: none;
+    }
 }
