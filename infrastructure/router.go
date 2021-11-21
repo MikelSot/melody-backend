@@ -20,9 +20,14 @@ func NewRouter(
 }
 
 func (ro router) Router() {
-	ro.serveMux.HandleFunc("/ws", middleware.Log(ro.Request))
+	ro.webPage()
+	ro.serveMux.HandleFunc("/ws", middleware.Log(ro.request))
 }
 
-func (ro router) Request(w http.ResponseWriter, r *http.Request) {
+func (ro router) request(w http.ResponseWriter, r *http.Request) {
 	ro.handler.handler(ro.controller, w, r)
+}
+
+func (ro router) webPage() {
+	ro.serveMux.Handle("/", http.FileServer(http.Dir("public")))
 }
