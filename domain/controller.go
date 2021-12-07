@@ -1,5 +1,6 @@
 package domain
 
+//START OMIT
 type Controller struct {
 	Users     map[string]*User
 	Login     chan *User
@@ -7,7 +8,9 @@ type Controller struct {
 	Broadcast chan Message
 }
 
-func NewController() *Controller{
+//END OMIT
+
+func NewController() *Controller {
 	return &Controller{
 		Users:     make(map[string]*User),
 		Login:     make(chan *User),

@@ -15,13 +15,14 @@ type router struct {
 func NewRouter(
 	s *http.ServeMux,
 	h *handler,
-	c *domain.Controller ) *router {
+	c *domain.Controller) *router {
 	return &router{s, h, c}
 }
 
+//START OMIT
 func (ro router) Router() {
 	ro.webPage()
-	ro.serveMux.HandleFunc("/ws", middleware.Log(ro.request))
+	ro.serveMux.HandleFunc("/ws", middleware.Log(ro.request)) // HL
 }
 
 func (ro router) request(w http.ResponseWriter, r *http.Request) {
@@ -29,5 +30,7 @@ func (ro router) request(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ro router) webPage() {
-	ro.serveMux.Handle("/", http.FileServer(http.Dir("public")))
+	ro.serveMux.Handle("/", http.FileServer(http.Dir("public"))) // HL
 }
+
+//END OMIT

@@ -1,0 +1,91 @@
+Real-Time Chat
+Diciembre, 2021
+
+Miguel Alejandro Soto Renojo
+Juan Francia Sanchez
+
+[[http://ec2-3-128-51-192.us-east-2.compute.amazonaws.com:8080/][Demo]]
+
+* Monitor
+
+* Threads o Gorutinas
+Paralelismo
+
+    “Hacer muchas cosas a la vez”
+
+
+
+Concurrencia
+
+    “Lidiar con muchas cosas a la vez”
+
+Es solamente una función o método que se ejecuta concurrentemente de forma independiente en el mismo espacio de direcciones con otras gorutinas.
+
+- Sincronizacion de acceso a la memoria
+
+  - Mutex
+  - WaitGroup
+
+- Compartiendo la memoria por comunicacion
+
+  - CSP (Comunicación de procesos secuenciales)
+  - Channels
+
+
+* Sync
+.play -edit  present/code/sync.go /^//START/,/^//END/
+
+.image present/img/father.png _ 400
+
+*
+.image present/img/SO_Project_Child.svg 500 500
+
+* CSP
+.play -edit present/code/csp.go /^//START/,/^//END/
+
+.image present/img/channel.jpeg _ 450
+
+_"No_se_comunique_compartiendo_la_memoria,_comparta_la_memoria_comunicándose"_
+
+
+* Diagrama de Clases
+
+.image present/img/SO_Project_Clase_Mejorado.svg _ 890
+
+
+* Domain
+
+Usuario
+.code domain/user.go /^//START/,/^//END/
+
+Controlador
+.code domain/controller.go /^//START/,/^//END/
+
+* Data
+.code data/user.go /^//START/,/^//END/
+
+* Handler
+.code present/code/handler.txt
+
+* Read
+.code infrastructure/user.go /^//START/,/^//END/
+
+* Write
+.code infrastructure/user.go /^//START_WRITE/,/^//END_WRITE/
+
+* Controler
+.code infrastructure/controller.go /^//START/,/^//END/
+.image present/img/work.jpg _ 400
+
+* Router
+.code infrastructure/router.go /^//START/,/^//END/
+.image present/img/gophermegaphones.jpg _ 550
+
+* Main
+.code main.go /^//START/,/^//END/
+.image present/img/build.jpg _ 190
+
+
+* Diagrama de Secuencia
+
+.image present/img/SO_Project_Secuencia_Mejorado.svg  _ 880

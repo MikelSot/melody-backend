@@ -12,19 +12,22 @@ type controller struct {
 
 func NewController(
 	data interfaces.DataPersistence,
-	c *domain.Controller ) *controller {
+	c *domain.Controller) *controller {
 	return &controller{data, c}
 }
 
+//START OMIT
 func (c controller) Run() {
-	for {
+	for { // HL
 		select {
-		case user := <- c.controller.Login:
+		case user := <-c.controller.Login: // HL
 			c.data.AddUser(user)
-		case user := <- c.controller.Logout:
+		case user := <-c.controller.Logout: // HL
 			c.data.DeleteUser(user)
-		case message := <- c.controller.Broadcast:
+		case message := <-c.controller.Broadcast: // HL
 			c.data.AddMessageQueue(message)
 		}
-	}
+	} // HL
 }
+
+//END OMIT
