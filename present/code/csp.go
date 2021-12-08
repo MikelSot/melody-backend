@@ -4,7 +4,7 @@ import "fmt"
 
 //START OMIT
 func main() {
-	sayHello := make(chan string, 2) // HL
+	sayHello := make(chan string) // HL
 
 	go func() {
 		sayHello <- "Hello" // HL

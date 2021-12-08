@@ -8,12 +8,16 @@ Juan Francia Sanchez
 
 * Monitor
 
+Los monitores son estructuras de datos utilizadas en lenguajes de programación
+para sincronizar dos o más procesos o hilos de ejecución que usan
+recursos compartidos.
+
+El monitor hace cumplir la exclusión mutua implícitamente de modo que un solo proceso este siendo ejecutado a la vez.
+
 * Threads o Gorutinas
 Paralelismo
 
     “Hacer muchas cosas a la vez”
-
-
 
 Concurrencia
 

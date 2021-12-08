@@ -19,8 +19,7 @@ func (u User) AddUser(user *domain.User) {
 }
 
 func (u User) DeleteUser(user *domain.User) {
-	_, state := u.controller.Users[user.Name]
-	if state {
+	if _, state := u.controller.Users[user.Name]; state {
 		delete(u.controller.Users, user.Name)
 		close(user.Message) // HL
 	}
