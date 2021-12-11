@@ -35,6 +35,8 @@ Integrantes:
 Para ejecutar el .EXE no necesita tener instalado el lenguaje de programación GO, simplemente
 le da doble click o por terminal lo puede ejecutar, el nombre del ejecutable es "melody-backend.exe".
 
+La aplicación se estará ejecutando en el puerto 8000, debe poner en su navegador `localhost:8000`
+
     PROBLEMA:
 
     En caso no pueda ejecutar él .EXE o tenga algún inconveniente, puede ingresar
