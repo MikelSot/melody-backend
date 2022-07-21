@@ -6,9 +6,8 @@ Concurrencia, aplicando el algoritmo de Monitor (prioridad a los proceso de escr
 
 ## Real-Time Chat
 
-Integrantes:
+Integrante:
  - Soto Renojo Miguel
- - Juan Francia Sanchez
 
 **LINKS:**
 
