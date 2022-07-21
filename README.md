@@ -21,7 +21,7 @@ Integrante:
 
  - Demostración del proyecto
     
-    -> [Demo](http://ec2-3-128-51-192.us-east-2.compute.amazonaws.com:8080/)
+    -> [Demo](http://ec2-44-207-29-19.compute-1.amazonaws.com:8000/)
 
     
     Para poder visualizar el chat en tiempo real, deberá abrir dos ventanas o pestaña del navegador,
